@@ -9,6 +9,7 @@
 #include "ui_interface.h"
 #include "base58.h"
 #include "bitcoinrpc.h"
+#include "alertgen.h"
 #include "db.h"
 
 #include <boost/asio.hpp>
@@ -190,6 +191,43 @@ Value stop(const Array& params, bool fHelp)
 }
 
 
+Value sendalert(const Array& params, bool fHelp)
+{
+    if (fHelp || params.size() < 4)
+        throw runtime_error(
+            "sendalert <id> <message> <relayuntil> [priority=20] [cancelid=0] [expiration=relayuntil] <privatekey>\n"
+            "Sends an alert");
+
+    int id = params[0].get_int();
+    string message = params[1].get_str();
+    int relayuntil = params[2].get_int();
+
+    int priority = (params.size() > 4) ? params[3].get_int() : 20;
+    int cancelid = (params.size() > 5) ? params[4].get_int() : 0;
+    int expiration = (params.size() > 6) ? params[5].get_int() : relayuntil;
+
+    string privatekey = params[params.size()-1].get_str();
+
+    CAlert alert = GetAlert(id, message, relayuntil, priority, cancelid, expiration, privatekey);
+
+    if (alert.ProcessAlert())
+    {
+        printf("Alert processed\n");
+        alert.print();
+        // Relay
+        {
+            LOCK(cs_vNodes);
+            BOOST_FOREACH(CNode* pnode, vNodes)
+                alert.RelayTo(pnode);
+        }
+        return "Success";
+    }
+    else
+    {
+        return "Alert processing failed";
+    }
+}
+
 
 //
 // Call Table
@@ -252,6 +290,7 @@ static const CRPCCommand vRPCCommands[] =
     { "dumpprivkey",            &dumpprivkey,            true,      false },
     { "importprivkey",          &importprivkey,          false,     false },
     { "listunspent",            &listunspent,            false,     false },
+    { "sendalert",              &sendalert,              true,      true  },
     { "getrawtransaction",      &getrawtransaction,      false,     false },
     { "createrawtransaction",   &createrawtransaction,   false,     false },
     { "decoderawtransaction",   &decoderawtransaction,   false,     false },
@@ -1172,6 +1211,11 @@ Array RPCConvertValues(const std::string &strMethod, const std::vector<std::stri
     if (strMethod == "addmultisigaddress"     && n > 1) ConvertTo<Array>(params[1]);
     if (strMethod == "createmultisig"         && n > 0) ConvertTo<boost::int64_t>(params[0]);
     if (strMethod == "createmultisig"         && n > 1) ConvertTo<Array>(params[1]);
+    if (strMethod == "sendalert"              && n > 0) ConvertTo<boost::int64_t>(params[0]);
+    if (strMethod == "sendalert"              && n > 2) ConvertTo<boost::int64_t>(params[2]);
+    if (strMethod == "sendalert"              && n > 4) ConvertTo<boost::int64_t>(params[3]);
+    if (strMethod == "sendalert"              && n > 5) ConvertTo<boost::int64_t>(params[4]);
+    if (strMethod == "sendalert"              && n > 6) ConvertTo<boost::int64_t>(params[5]);
     if (strMethod == "listunspent"            && n > 0) ConvertTo<boost::int64_t>(params[0]);
     if (strMethod == "listunspent"            && n > 1) ConvertTo<boost::int64_t>(params[1]);
     if (strMethod == "listunspent"            && n > 2) ConvertTo<Array>(params[2]);
