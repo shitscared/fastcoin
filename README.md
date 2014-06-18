@@ -39,18 +39,17 @@ labeled 'stale'.
 ## Download binaries
 
 * https://github.com/fastcoinproject/fastcoin `Source`
-* https://drive.google.com/folderview?id=0B37Llt3dDAzHV1Q5U0JvSjViTVU&usp=sharing `Win32`
-* https://drive.google.com/folderview?id=0B37Llt3dDAzHeE9oU1laVmk0UkE&usp=sharing `Linux`
-* https://drive.google.com/folderview?id=0B37Llt3dDAzHWUQ2VENySHcxMG8&usp=sharing `Mac`
-* https://drive.google.com/?tab=wo&authuser=0#folders/0B37Llt3dDAzHcmdWRE1yLXZaSU0 `Android`
-* https://docs.google.com/file/d/0B-lUxAN4BdWcM2g0ZlNtWllHZTQ/edit?usp=sharing `Dev`
+* https://sourceforge.net/projects/fastcoin/files/win32 `Win32`
+* https://sourceforge.net/projects/fastcoin/files/debian_ubuntu_mint/ `Linux`
+* https://sourceforge.net/projects/fastcoin/files/mac/ `Mac`
+* https://sourceforge.net/projects/fastcoin/files/android/ `Android`
+* https://sourceforge.net/p/fastcoin/code/ci/master/tree/ `Dev`
 
 ## Download bootstrap
 
-* https://docs.google.com/uc?id=0B69j4ujTdGRvRUZEOHNtNGp0XzA `bootstrap.dat`
-* https://docs.google.com/uc?id=0B69j4ujTdGRvT2NvVTlHemRqZFE `bootstrap.dat.xz`
-* https://www.dropbox.com/s/tbo0atlqaoojd7w/bootstrap.dat `bootstrap.dat`
-* https://www.dropbox.com/s/uhof8ocyvtwofbq/bootstrap.dat.xz `bootstrap.dat.xz`
+* https://archive.org/download/fastcoin_bootstrap/bootstrap.dat `bootstrap.dat`
+* https://archive.org/download/fastcoin_bootstrap/bootstrap.dat.xz `bootstrap.dat.xz`
+* https://sourceforge.net/projects/fastcoin/files/bootstrap `bootstrap.dat.xz`
 
 ## Forums
 
