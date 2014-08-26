@@ -1,0 +1,1 @@
+https://github.com/fastcoinproject/fastcoin/issues/11
