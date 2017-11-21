@@ -60,6 +60,6 @@ labeled 'stale'.
 * https://twitter.com/fast_coin
 * https://www.facebook.com/pages/Fastcoinca/593923330628082
 * https://webchat.freenode.net/?channels=#fastcoin
-
+**CORE
 
 
